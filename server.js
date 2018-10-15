@@ -2,6 +2,8 @@ const express =require('express'); // the framework
 const mongoose =require('mongoose'); // object modeling for our MongoDB database
 const bodyParser =require('body-parser'); // allow us to take request/data from the body
 
+const items = require('./routes/api/items');
+
 const app = express();
 
 // Bodyparser Middleware
@@ -14,6 +16,9 @@ const db = require('./config/keys').mongoURI;
 mongoose.connect(db)
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+
+// Use Routes
+app.use('/api/items', items);
 
 const port = process.env.PORT || 5000;
 
